@@ -12,6 +12,8 @@
 </head>
 
 <body>
+  <!-- LOADING -->
+  <div class="loading active" id="loading"></div>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -19,6 +21,11 @@
       <a class="navbar-brand" href="#">
         <img src="./images/logo-pokemon.png" alt="Logo" width="70" class="d-inline-block align-text-top">
       </a>
+
+      <form class="d-flex" role="search">
+        <input id="inputBusqueda" class="form-control me-2" type="search" placeholder="Pokemon" aria-label="Search">
+        <button id="btnBusqueda" class="btn btn-outline-light" type="button">Buscar</button>
+      </form>
     </div>
   </nav>
 
@@ -32,6 +39,7 @@
   <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./node_modules/axios/dist/axios.min.js"></script>
   <script src="./js/services.js"></script>
+  <script src="./js/global.js"></script>
   <script src="./js/main.js"></script>
 </body>
 
