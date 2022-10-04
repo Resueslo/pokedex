@@ -1,0 +1,23 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Proyecto para modulo javascript avanzado",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Resueslo/pokedex.git"
+  },
+  "author": "Moises, Yurivia y Reyna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Resueslo/pokedex/issues"
+  },
+  "homepage": "https://github.com/Resueslo/pokedex#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.2"
+  }
+}
