@@ -1,9 +1,13 @@
+let listaPokemones = [];
+
 const cargarPokemones = () => {
   let elListaPokemones = document.getElementById("listaPokemones");
 
 
   obtenerListaPokemones().then((pokemones) => {
+    desactivarLoading();
     if (pokemones && pokemones.length) {
+      listaPokemones = pokemones;
       pokemones.forEach((pokemon, index) => {
         let div = document.createElement('div');
         div.classList = "col-md-3 col-sm-4";
@@ -23,12 +27,12 @@ const cargarPokemones = () => {
 
         div.appendChild(card);
         elListaPokemones.appendChild(div);
-
-        console.log("pokemon", pokemon.name);
       })
     }
   })
 }
 
 
-cargarPokemones();
+setTimeout(() => {
+  cargarPokemones();
+}, 1000)
