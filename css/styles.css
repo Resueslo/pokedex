@@ -1,0 +1,27 @@
+body {
+    background-color: #212529ed;
+}
+
+.loading {
+    width: 100%;
+    height: 100%;
+    background-color: #000000cc;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    background-image: url(../../images/loading.svg);
+    background-repeat: no-repeat;
+    background-size: 60px;
+    background-position: center;
+    display: none;
+}
+
+.loading.active {    
+    display: block !important;
+}
+
+
+.container-pokemon {
+    margin-top: 70px;
+}
