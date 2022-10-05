@@ -9,28 +9,51 @@ const cargarPokemones = () => {
     if (pokemones && pokemones.length) {
       listaPokemones = pokemones;
       pokemones.forEach((pokemon, index) => {
+        obtenerPokemon(pokemon.name).then((pokemon)=>{
+          console.log(pokemon);
         let div = document.createElement('div');
         div.classList = "col-md-3 col-sm-4";
         let card = document.createElement('div');
         card.classList = "card text-bg-dark mb-3";
         card.addEventListener("click", e => {
-          window.location = `detalle.html?name=${pokemon.name}`;
+          // detallePokemon(pokemon);
         });
 
         card.innerHTML = `
-                      <img src="./images/001.png" class="card-img-top" alt="">
+                      <img src="${pokemon.sprites.front_default}" class="card-img-top" alt="">
                       <div class="card-body">
                         <h5 class="card-title">${pokemon.name}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       </div>
                     `;
 
         div.appendChild(card);
         elListaPokemones.appendChild(div);
       })
+      })
     }
   })
 }
+
+// function detallePokemon(data){
+  
+//   let modal = document.createElement('div');
+//   modal.setAttribute('id','modal');
+//   modal.setAttribute('class','modal');
+//   let card = document.createElement('div');
+//   card.classList("modal-content")
+//   card.innerHTML = `
+//                       <img src="${data.sprites.front_default}" class="card-img-top" alt="">
+//                       <div class="card-body">
+//                         <h5 class="card-title">${data.name}</h5>
+//                       </div>
+//                     `;
+
+//   modal.appendChild(card);
+//   console.log(card);
+//   $('#modal').modal('show');
+// }
+
+
 
 
 setTimeout(() => {
