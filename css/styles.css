@@ -25,3 +25,11 @@ body {
 .container-pokemon {
     margin-top: 70px;
 }
+
+.container-pokemon .card {    
+    cursor: pointer;
+}
+
+.container-pokemon .card:hover {    
+    box-shadow: 0 0 5px #59535399;
+}
