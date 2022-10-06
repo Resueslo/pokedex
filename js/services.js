@@ -2,7 +2,7 @@ const URL_API = "https://pokeapi.co/api/v2";
 const URL_IMG = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png"
 
 async function obtenerListaPokemones() {
-    let url = `${URL_API}/pokemon`;
+    let url = `${URL_API}/pokemon/?offset=0&limit=500`;
     try {
         let response = await axios.get(url)
         console.log(response.data.results);
