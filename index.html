@@ -13,7 +13,7 @@
 
 <body>
   <!-- LOADING -->
-  <div class="loading active" id="loading"></div>
+  <div class="loading" id="loading"></div>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -27,15 +27,14 @@
   <!-- FILTRO -->
   <div class="container">
     <div class="contenedor-filtros d-flex align-items-center justify-content-between">  
-      <select id="comboTipos" class="form-select" aria-label="Default select example">
+      <select id="comboTipos" class="form-select mb-2" aria-label="Default select example">
         <option selected value="-1">Selecionar tipo Pokemon</option>
       </select>
-      <form class="d-flex" role="search">
+      <form class="d-flex mb-2" role="search">
         <input id="inputBusqueda" class="form-control me-2" type="search" placeholder="Nombre Pokemon" aria-label="Search">
       </form>
     </div>
   </div>
-
 
   <!-- CONTENIDO -->
   <div class="container container-pokemon">
@@ -43,7 +42,7 @@
     </div>
   </div>
 
-  
+  <script src="./node_modules/bootstrap/js/dist/popover.js"></script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./node_modules/axios/dist/axios.min.js"></script>
   <script src="./node_modules/lazyload/lazyload.min.js"></script>

@@ -6,6 +6,9 @@ let select = document.getElementById("comboTipos");
 
 let listaPokemones = [];
 
+
+activarLoading();
+
 // BUSQUEDA
 if (inputBusqueda) {
   inputBusqueda.addEventListener("keyup", () => {
@@ -18,8 +21,6 @@ if (inputBusqueda) {
     busquedaPokemon(textoBusqueda);
   })
 }
-
-
 
 
 const cargarPokemones = () => {
@@ -41,17 +42,27 @@ const cargarPokemonesPorTipo = tipoId => {
   })
 };
 
-const obtenerInfoPokemon = pokemones => {  
+const obtenerInfoPokemon = pokemones => {
   // LIMPIAR LISTA
   elListaPokemones.innerHTML = "";
 
-  pokemones.forEach(pokemon => {
+  pokemones.forEach((pokemon, index) => {
     obtenerPokemon(pokemon.name).then((pokemon) => {
       if (pokemon) {
         listaPokemones.push(pokemon);
         cargarPokemon(pokemon);
       }
     })
+
+    if (index == pokemones.length - 1) {
+      setTimeout(() => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        desactivarLoading();
+        lazyload();
+      }, 1000)
+    }
   })
 };
 
@@ -65,33 +76,28 @@ const cargarPokemon = pokemon => {
   });
 
   // TIPOS DEL POKEMON
-  let contador = 0;
   let span = "";
-  let totalTipos = 0;
   if (pokemon.types && pokemon.types.length) {
-    totalTipos = pokemon.types.length;
-    pokemon.types.forEach(type => {
-      span += `<span class="badge rounded-pill text-bg-light me-2">${type.type.name}</span>`;
-      contador++;
+    pokemon.types.forEach((type, index) => {
+      span += `<span class="icon-pokemon ${type.type.name} me-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="${type.type.name}"></span>`;
+
+      if (index == pokemon.types.length - 1) {
+
+        card.innerHTML = `
+                  <img data-src="${pokemon.sprites.front_default}" class="lazyload card-img-top" width="100" alt="${pokemon.name}"></img>
+                  <div class="card-body">
+                    <h5 class="card-title">${pokemon.name}</h5>
+                    ${span}
+                  </div>
+                `;
+
+        div.appendChild(card);
+        elListaPokemones.appendChild(div);
+      }
     });
   }
-
-  if (contador == totalTipos) {
-    card.innerHTML = `
-              <img data-src="${pokemon.sprites.front_default}" class="lazyload card-img-top" width="100" alt="${pokemon.name}"></img>
-              <div class="card-body">
-                <h5 class="card-title">${pokemon.name}</h5>
-                ${span}
-              </div>
-            `;
-
-    div.appendChild(card);
-    elListaPokemones.appendChild(div);
-
-    desactivarLoading();
-    lazyload();
-  }
 };
+
 
 const busquedaPokemon = busqueda => {
   // LIMPIAR LISTA
@@ -111,14 +117,16 @@ const cargarComboTipos = () => {
   obtenerListaTipos().then((tipos) => {
     if (tipos && tipos.length) {
       tipos.forEach(tipo => {
-        let numeros = tipo.url.match(regex);
-        let id = numeros[numeros.length - 1];
+        if (tipo.name != 'unknown' && tipo.name != 'shadow') {
+          let numeros = tipo.url.match(regex);
+          let id = numeros[numeros.length - 1];
 
-        let option = document.createElement('option');
-        option.value = id;
-        option.text = tipo.name;
+          let option = document.createElement('option');
+          option.value = id;
+          option.text = tipo.name;
 
-        select.appendChild(option);
+          select.appendChild(option);
+        }
       });
     }
   })
@@ -132,8 +140,6 @@ select.addEventListener("change", function () {
     cargarPokemones();
 })
 
-setTimeout(() => {
-  cargarPokemones();
-}, 1000)
 
+cargarPokemones();
 cargarComboTipos();
