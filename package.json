@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Resueslo/pokedex#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.2"
+    "bootstrap": "^5.2.2",
+    "lazyload": "^2.0.0-rc.2"
   }
 }
