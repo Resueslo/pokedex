@@ -25,3 +25,26 @@ async function obtenerPokemon(id) {
         return []
     }
 }
+
+async function obtenerListaPokemonesPorTipo(tipoId) {
+    let url = `${URL_API}/type/${tipoId}`;
+    try {
+        let response = await axios.get(url)
+        return response.data
+        
+    } catch (e) {
+        return []
+    }
+}
+
+
+async function obtenerListaTipos() {
+    let url = `${URL_API}/type/`;
+    try {
+        let response = await axios.get(url)
+        return response.data.results
+        
+    } catch (e) {
+        return []
+    }
+}

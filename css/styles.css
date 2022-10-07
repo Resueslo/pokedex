@@ -1,5 +1,7 @@
 body {
     background-color: #212529ed;
+    padding-top: 150px;
+    color: #ffffff;
 }
 
 .loading {
@@ -17,19 +19,85 @@ body {
     display: none;
 }
 
-.loading.active {    
+.loading.active {
     display: block !important;
 }
 
-
-.container-pokemon {
-    margin-top: 70px;
-}
-
-.container-pokemon .card {    
+.container-pokemon .card {
     cursor: pointer;
 }
 
-.container-pokemon .card:hover {    
+.container-pokemon .card:hover {
     box-shadow: 0 0 5px #59535399;
+    transform: scale(1.1);
+    cursor: pointer;
 }
+
+.contenedor-filtros .form-select {
+    width: 230px;
+    color: #6c757d;
+}
+
+
+/* MEDIAS QUERIES */
+@media screen and (max-width: 500px) {
+    .contenedor-filtros {
+        display: block !important;
+    }
+    
+    .form-select  {
+        width: 100% !important;
+    }
+
+    .form-control {
+        margin-right: 0 !important;
+    }
+}
+
+/* ICONOS */
+.icon-pokemon {
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center center;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+}
+
+.normal { background-image: url(../../images/normal_type.png); }
+
+.fighting { background-image: url(../../images/fighting_type.png); }
+
+.flying { background-image: url(../../images/flying_type.png); }
+
+.poison { background-image: url(../../images/poison_type.png); }
+
+.ground { background-image: url(../../images/ground_type.png); }
+
+.rock { background-image: url(../../images/rock_type.png); }
+
+.bug { background-image: url(../../images/bug_type.png); }
+
+.ghost { background-image: url(../../images/ghost_type.png); }
+
+.steel { background-image: url(../../images/steel_type.png); }
+
+.fire { background-image: url(../../images/fire_type.png); }
+
+.water { background-image: url(../../images/water_type.png); }
+
+.grass { background-image: url(../../images/grass_type.png); }
+
+.electric { background-image: url(../../images/electric_type.png); }
+
+.psychic { background-image: url(../../images/psychic_type.png); }
+
+.ice { background-image: url(../../images/ice_type.png); }
+
+.dragon { background-image: url(../../images/dragon_type.png); }
+
+.dark { background-image: url(../../images/dark_type.png); }
+
+.fairy { background-image: url(../../images/fairy_type.png); }
+
+.shadow { background-image: url(../../images/shadow_type.png); }
