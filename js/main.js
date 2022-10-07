@@ -2,6 +2,7 @@
 // ELEMENTOS
 let elListaPokemones = document.getElementById("listaPokemones");
 const inputBusqueda = document.getElementById("inputBusqueda");
+let select = document.getElementById("comboTipos");
 
 let listaPokemones = [];
 
@@ -12,7 +13,7 @@ if (inputBusqueda) {
 
     if (!textoBusqueda) {
       console.log("Debe ingresar un nombre");
-      return;
+      cargarPokemones();
     }
     busquedaPokemon(textoBusqueda);
   })
@@ -22,19 +23,37 @@ if (inputBusqueda) {
 
 
 const cargarPokemones = () => {
+  activarLoading();
   obtenerListaPokemones().then((pokemones) => {
-    desactivarLoading();
     if (pokemones && pokemones.length) {
-      pokemones.forEach(pokemon => {
-        obtenerPokemon(pokemon.name).then((pokemon) => {
-          listaPokemones.push(pokemon);
-          console.log(pokemon);
-          cargarPokemon(pokemon);
-        })
-      })
+      obtenerInfoPokemon(pokemones);
     }
   })
 }
+
+const cargarPokemonesPorTipo = tipoId => {
+  activarLoading();
+  obtenerListaPokemonesPorTipo(tipoId).then((pokemones) => {
+    if (pokemones.pokemon && pokemones.pokemon.length) {
+      let lista = pokemones.pokemon.map(pokemon => pokemon.pokemon);
+      obtenerInfoPokemon(lista);
+    }
+  })
+};
+
+const obtenerInfoPokemon = pokemones => {  
+  // LIMPIAR LISTA
+  elListaPokemones.innerHTML = "";
+
+  pokemones.forEach(pokemon => {
+    obtenerPokemon(pokemon.name).then((pokemon) => {
+      if (pokemon) {
+        listaPokemones.push(pokemon);
+        cargarPokemon(pokemon);
+      }
+    })
+  })
+};
 
 const cargarPokemon = pokemon => {
   let div = document.createElement('div');
@@ -48,16 +67,18 @@ const cargarPokemon = pokemon => {
   // TIPOS DEL POKEMON
   let contador = 0;
   let span = "";
+  let totalTipos = 0;
   if (pokemon.types && pokemon.types.length) {
+    totalTipos = pokemon.types.length;
     pokemon.types.forEach(type => {
       span += `<span class="badge rounded-pill text-bg-light me-2">${type.type.name}</span>`;
       contador++;
     });
-  }  
+  }
 
-  if (contador == pokemon.types.length) {
+  if (contador == totalTipos) {
     card.innerHTML = `
-              <img src="${pokemon.sprites.front_default}" class="lazyload card-img-top" alt="${pokemon.name}"></img>
+              <img data-src="${pokemon.sprites.front_default}" class="lazyload card-img-top" width="100" alt="${pokemon.name}"></img>
               <div class="card-body">
                 <h5 class="card-title">${pokemon.name}</h5>
                 ${span}
@@ -66,6 +87,9 @@ const cargarPokemon = pokemon => {
 
     div.appendChild(card);
     elListaPokemones.appendChild(div);
+
+    desactivarLoading();
+    lazyload();
   }
 };
 
@@ -81,35 +105,35 @@ const busquedaPokemon = busqueda => {
 
 };
 
+const cargarComboTipos = () => {
+  const regex = /(\d+)/g;
 
+  obtenerListaTipos().then((tipos) => {
+    if (tipos && tipos.length) {
+      tipos.forEach(tipo => {
+        let numeros = tipo.url.match(regex);
+        let id = numeros[numeros.length - 1];
 
-document.addEventListener("DOMContentLoaded", function (event) {
+        let option = document.createElement('option');
+        option.value = id;
+        option.text = tipo.name;
 
-});
+        select.appendChild(option);
+      });
+    }
+  })
+};
 
-
-// function detallePokemon(data){
-
-//   let modal = document.createElement('div');
-//   modal.setAttribute('id','modal');
-//   modal.setAttribute('class','modal');
-//   let card = document.createElement('div');
-//   card.classList("modal-content")
-//   card.innerHTML = `
-//                       <img src="${data.sprites.front_default}" class="card-img-top" alt="">
-//                       <div class="card-body">
-//                         <h5 class="card-title">${data.name}</h5>
-//                       </div>
-//                     `;
-
-//   modal.appendChild(card);
-//   console.log(card);
-//   $('#modal').modal('show');
-// }
-
-
-
+select.addEventListener("change", function () {
+  inputBusqueda.value = "";
+  if (this.value != '-1')
+    cargarPokemonesPorTipo(this.value)
+  else
+    cargarPokemones();
+})
 
 setTimeout(() => {
   cargarPokemones();
 }, 1000)
+
+cargarComboTipos();

@@ -1,5 +1,7 @@
 body {
     background-color: #212529ed;
+    padding-top: 150px;
+    color: #ffffff;
 }
 
 .loading {
@@ -21,15 +23,16 @@ body {
     display: block !important;
 }
 
-
-.container-pokemon {
-    margin-top: 70px;
-}
-
 .container-pokemon .card {    
     cursor: pointer;
 }
 
 .container-pokemon .card:hover {    
     box-shadow: 0 0 5px #59535399;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.contenedor-filtros .form-select {
+    width: 350px;
 }
