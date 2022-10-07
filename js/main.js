@@ -13,11 +13,6 @@ activarLoading();
 if (inputBusqueda) {
   inputBusqueda.addEventListener("keyup", () => {
     let textoBusqueda = inputBusqueda.value;
-
-    if (!textoBusqueda) {
-      console.log("Debe ingresar un nombre");
-      cargarPokemones();
-    }
     busquedaPokemon(textoBusqueda);
   })
 }
@@ -55,13 +50,7 @@ const obtenerInfoPokemon = pokemones => {
     })
 
     if (index == pokemones.length - 1) {
-      setTimeout(() => {
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-
-        desactivarLoading();
-        lazyload();
-      }, 1000)
+      cargarTooltips();
     }
   })
 };
@@ -100,15 +89,32 @@ const cargarPokemon = pokemon => {
 
 
 const busquedaPokemon = busqueda => {
+  activarLoading();
   // LIMPIAR LISTA
   elListaPokemones.innerHTML = "";
 
-  listaPokemones.forEach(pokemon => {
+  let listaFiltrada;
+
+  if(busqueda) {
+    listaFiltrada = listaPokemones.filter(pokemon => pokemon.name.includes(busqueda));
+  } else {
+    listaFiltrada = listaPokemones;
+  };
+
+  if(!listaFiltrada.length) {
+    desactivarLoading();
+    return;
+  };
+
+  listaFiltrada.forEach((pokemon, index) => {
     if (pokemon.name.includes(busqueda)) {
       cargarPokemon(pokemon);
     }
-  });
 
+    if(index == listaFiltrada.length-1) {
+      cargarTooltips();
+    }    
+  });
 };
 
 const cargarComboTipos = () => {
@@ -140,6 +146,16 @@ select.addEventListener("change", function () {
     cargarPokemones();
 })
 
+
+const cargarTooltips = () => {
+  setTimeout(() => {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+    desactivarLoading();
+    lazyload();
+  }, 1000);
+}
 
 cargarPokemones();
 cargarComboTipos();
