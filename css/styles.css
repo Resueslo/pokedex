@@ -101,3 +101,22 @@ body {
 .fairy { background-image: url(../../images/fairy_type.png); }
 
 .shadow { background-image: url(../../images/shadow_type.png); }
+
+.col-md-6{
+    font-size: 20px;
+}
+
+.namePokemon{
+    font-size: 20px;
+}
+.habilidades{
+    font-size: 20px;
+}
+
+.movimientos{
+    font-size: 20px;
+}
+
+.estadisticas{
+    font-size: 20px;
+}
