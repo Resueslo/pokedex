@@ -1,5 +1,5 @@
 const URL_API = "https://pokeapi.co/api/v2";
-const URL_IMG = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/0${id}.png"
+const URL_IMG = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world"
 
 async function obtenerListaPokemones() {
     let url = `${URL_API}/pokemon/?offset=0&limit=500`;

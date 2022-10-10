@@ -1,4 +1,7 @@
 
+
+// ELEMENTOS HTML
+let elImg = document.getElementById("imagen");
 init = () => {
     //obtener parametros
     const urlParams = new URLSearchParams(window.location.search);
@@ -22,6 +25,9 @@ async function obtenerDetallePokemon(id) {
          let data = pokemon['data'];
          let contador = 1;
          let concatenarDos = '';
+
+         
+         elImg.setAttribute("src", `${URL_IMG}/${data.id}.svg`);
 
          data.abilities.forEach(element => {
            if (contador ==1){
