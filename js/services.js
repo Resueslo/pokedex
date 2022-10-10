@@ -48,3 +48,17 @@ async function obtenerListaTipos() {
         return []
     }
 }
+
+async function obtenerDatosPokemon(id) {
+    let url = `${URL_API}/pokemon/${id}`;
+    console.log(url);
+    try {
+        let response = await axios.get(url)
+        console.log('123');
+        console.log(response);
+        return response
+        
+    } catch (e) {
+        return []
+    }
+}
