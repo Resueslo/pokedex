@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex</title>
+
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <!-- LOADING -->
+  <div class="loading" id="loading"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="./images/logo-pokemon.png" alt="Logo" width="70" class="d-inline-block align-text-top">
+      </a>
+    </div>
+  </nav>
+
+  <!-- FILTRO -->
+  <div class="container">
+    <div class="contenedor-filtros d-flex align-items-center justify-content-between">  
+      <select id="comboTipos" class="form-select mb-2" aria-label="Default select example">
+        <option selected value="-1">Selecionar tipo Pokemon</option>
+      </select>
+      <form class="d-flex mb-2" role="search">
+        <input id="inputBusqueda" class="form-control me-2" type="search" placeholder="Nombre Pokemon" aria-label="Search">
+      </form>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div class="container container-pokemon">
+    <div id="listaPokemones" class="row pt-5">
+    </div>
+  </div>
+
+  <script src="./node_modules/bootstrap/js/dist/popover.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script src="./node_modules/lazyload/lazyload.min.js"></script>
+  <script src="./js/services.js"></script>
+  <script src="./js/global.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
